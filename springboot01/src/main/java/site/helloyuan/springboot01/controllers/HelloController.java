@@ -1,4 +1,4 @@
-package site.helloyuan.springboot01.controlers;
+package site.helloyuan.springboot01.controllers;
 
 import java.util.concurrent.atomic.AtomicLong;
 
