@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -34,21 +37,20 @@ public class Todo {
     @Column
     private String tag;
     @Column
+    @CreationTimestamp
     private Timestamp create_timestamp;
     @Column
+    @UpdateTimestamp
     private Timestamp update_timestamp;
     
     public Todo() {
     }
 
-    public Todo(String name, String description, List<String> items, String tag, Timestamp create_timestamp,
-            Timestamp update_timestamp) {
+    public Todo(String name, String description, List<String> items, String tag) {
         this.name = name;
         this.description = description;
         this.items = items;
         this.tag = tag;
-        this.create_timestamp = create_timestamp;
-        this.update_timestamp = update_timestamp;
     }
     
 }

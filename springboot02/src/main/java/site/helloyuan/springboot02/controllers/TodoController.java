@@ -27,9 +27,19 @@ public class TodoController {
     public List<Todo> getTodos(){
         return todoService.getTodos();
     }
+
+    @GetMapping("/todos/list")
+    public List<Long> getTodoList(){
+        return todoService.getTodosId();
+    }
+    
+    @GetMapping("/todos/test")
+    public List<Todo> getTodoTest() {
+        return todoService.test();
+    }
     
     @Bean
-    public CommandLineRunner preSetup(TodoDao repository){
+    public CommandLineRunner dataInit(TodoDao repository){
         return (args) -> {
 
             List<String> defaultItems = new ArrayList<String>() {
@@ -46,14 +56,9 @@ public class TodoController {
                     add("第三項");
                 }
             };
-
-            long t = System.currentTimeMillis();
-            Timestamp ct = new Timestamp(t);
             
-            repository.save(new Todo("Todo01","First Demo Todo list",defaultItems,"Demo",ct,ct));
-            repository.save(new Todo("Todo02","Second Demo Todo list",secondItems,"Demo",ct,ct));
-
-            
+            repository.save(new Todo("Todo01","First Demo Todo list",defaultItems,"Demo"));
+            repository.save(new Todo("Todo02","Second Demo Todo list",secondItems,"Demo"));
         };
     }
 }
