@@ -1,6 +1,5 @@
 package site.helloyuan.springboot02.controllers;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import site.helloyuan.springboot02.daos.TodoDao;
@@ -37,7 +39,20 @@ public class TodoController {
     public List<Todo> getTodoTest() {
         return todoService.test();
     }
-    
+
+    // 測試取得 client 送的 form-data
+    @PostMapping("/test/form")
+    public String name(@RequestParam String name) {
+        return name;
+    }
+
+    // 測試取得 client 送的 query string
+    @PostMapping("/test/query/{id}")
+    public Integer queryTest(@PathVariable Integer id) {
+        return id;
+    }
+
+
     @Bean
     public CommandLineRunner dataInit(TodoDao repository){
         return (args) -> {
